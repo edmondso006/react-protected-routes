@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       }
    }, []);
 
-   const login = async () => {
+   const login = async (): Promise<void> => {
       const result = await fakeAsyncLogin();
 
       if (result) {
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       }
    };
 
-   const logout = async () => {
+   const logout = async (): Promise<void> => {
       const result = await fakeAsyncLogout();
 
       if (result) {
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
    /// Mock Async Login API call.
    // TODO: Replace with your actual login API Call code
-   const fakeAsyncLogin = async () => {
+   const fakeAsyncLogin = async (): Promise<string> => {
       return new Promise((resolve, reject) => {
          setTimeout(() => {
             resolve("Logged In");
@@ -56,19 +56,17 @@ export const AuthProvider = ({ children }) => {
    };
 
    // Fixes the reload issue
-   const fakeAsyncLoginCheck = async () => {
+   const fakeAsyncLoginCheck = async (): Promise<boolean> => {
       return new Promise((resolve, reject) => {
          setTimeout(() => {
-            resolve(
-               "The user is currently logged in / has an active session on the server"
-            );
+            resolve(true);
          }, 300);
       });
    };
 
    // Mock Async Logout API call.
    // TODO: Replace with your actual logout API Call code
-   const fakeAsyncLogout = async () => {
+   const fakeAsyncLogout = async (): Promise<string> => {
       return new Promise((resolve, reject) => {
          setTimeout(() => {
             resolve("The user has successfully logged on the server");
